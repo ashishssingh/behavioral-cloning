@@ -64,6 +64,7 @@ Used udacity provided 3 camera data.
 * Adjusting batch size and epochs resulted in a much better driving, but the car won't make past the curve after the bridge, as the curve is a sharp right turn.
 * On looking at a video of the udacity data on youtube it was obvious that there are more left turns than right turns to train on. Which was solved by flipping the images to generate equal number of left and right turns.
 * On training on flipped data car was able to drive much better but would still jump into the lake.
+* To which training for more epochs and first training on 3 camera data and then on center camera data gave much better result.
 
 ####2. Final Model Architecture
 
