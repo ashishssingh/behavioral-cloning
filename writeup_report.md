@@ -23,25 +23,30 @@ python drive.py model.h5
 
 ####3. Submssion code is usable and readable
 
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+The model.py file contains the code for training and saving the convolution neural network. ymodel.py shows the pipeline that was used for training and validating the model.
 
 ###Model Architecture and Training Strategy
 
 ####1. An appropriate model arcthiecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
+Ymodel is a model used by Vivek Yadav, which consists of 4 2D convolution layers with 3x3 filter sizes and feature size of 3, 32, 64 and 128 respectively. Conv2D layers is follower up by 3 fully connected layers of output size 512, 64, and 16 in that order.
 
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
+Conv2D layers are followed by dropuout layers, whereas fully connected don't.
+All layers have RELU activation applier to their outputs.
 
 ####2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
-
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+a. Model has dropuout layers following conv2D to avoid overfitting. Also making sure that data has equal number of left and right turns.
+b. Trained the model early on with 3 cameras, and later on with only central camera data.
+c. Tried using Y channel of YUV and swapping RGB channels - but didn't provide any improvements, so were aboandoned.
+d. Made sure that 0 angles are not at all used to avoid bias towards driving straight.
 
 ####3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
+a. The model used an adam optimizer,
+b. batch size of 128,
+c. samples per epoch of 15k for single camera and 45k for 3 cameras,
+d. trained for 9 epochs - 4 with 3 camera data and 5 wiht only center camera data
 
 ####4. Appropriate training data
 
