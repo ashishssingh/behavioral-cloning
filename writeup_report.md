@@ -10,7 +10,7 @@
 
 My project includes the following files:
 * model.py containing the script to create and train the model
-* ymodel.py the actual convnet model used by model.py
+* amodel.py the actual convnet model used by model.py
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
 * writeup_report.md summarizing the results
@@ -29,7 +29,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 ####1. An appropriate model arcthiecture has been employed
 
-Ymodel is a model used by Vivek Yadav, which consists of 4 2D convolution layers with 3x3 filter sizes and feature size of 3, 32, 64 and 128 respectively. Conv2D layers is follower up by 3 fully connected layers of output size 512, 64, and 16 in that order.
+amodel is a model is simplified from Nvidia model, which consists of 4 2D convolution layers with 3x3 filter sizes and feature size of 3, 32, 64 and 128 respectively. Conv2D layers is follower up by 3 fully connected layers of output size 512, 64, and 16 in that order.
 
 Conv2D layers are followed by dropuout layers, whereas fully connected don't.
 All layers have RELU activation applier to their outputs.
@@ -58,14 +58,16 @@ Used udacity provided 3 camera data.
 
 * First thing was to great a generator that could provided data indefinitely for training
 * Then created a basic convnet model to train on non-augmented data to see the intial behavior of the trained model output
-* At this time also deployed Nvidia model, and the result was that the car would early on drive of the track
-* Also found a model used by Vivek Yadav and used it as well - 
+* At this time also deployed Nvidia model, and the result was that the car would early on drive of the track 
 * Got the suggestion of using 3 cameras from slack channel and used it. This turned out to be much better but car would still wonder off.
 * Adjusting batch size and epochs resulted in a much better driving, but the car won't make past the curve after the bridge, as the curve is a sharp right turn.
 * On looking at a video of the udacity data on youtube it was obvious that there are more left turns than right turns to train on. Which was solved by flipping the images to generate equal number of left and right turns.
 * On training on flipped data car was able to drive much better but would still jump into the lake.
 * To which training for more epochs and first training on 3 camera data and then on center camera data gave much better result.
+* After doing so the car started driving and then reduced paramteres to find an optimal model that would work, which resulted in amodel.py
+* Also tried shuffling training data, but it didn't work as well as the ordered data. Maybe the model was overfitting. Would have looked into why shuffled training data didn't work if had more time.
+* Also tried flipping image color channels to remove depedency of seening road as gray, but didn't see any benefit from it.
 
 ####2. Final Model Architecture
 
-
+Final model acrchitecture consists of 4 2D convolution layers with 3x3 filter sizes and feature size of 3, 32, 64 and 128 respectively. Conv2D layers is follower up by 3 fully connected layers of output size 256, 64, and 16 in that order.
